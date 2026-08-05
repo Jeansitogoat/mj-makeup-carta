@@ -2,6 +2,16 @@
 
 Catálogo móvil: presentación, portafolios por servicio y WhatsApp.
 
+## Enlace público (para clientes)
+
+**Comparte este enlace**, no el archivo HTML:
+
+**https://jeansitogoat.github.io/mj-makeup-carta/**
+
+Repositorio: [github.com/Jeansitogoat/mj-makeup-carta](https://github.com/Jeansitogoat/mj-makeup-carta)
+
+(GitHub Pages puede tardar 1–2 minutos la primera vez en publicarse.)
+
 ## Importante: cómo compartir con clientes
 
 **No envíes solo el archivo `.html` por WhatsApp.** En iPhone y Android se ve roto (sin diseño, sin fotos, sin video) porque:
