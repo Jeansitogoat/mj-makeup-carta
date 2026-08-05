@@ -4,13 +4,18 @@ Catálogo móvil: presentación, portafolios por servicio y WhatsApp.
 
 ## Enlace público (para clientes)
 
-**Comparte este enlace**, no el archivo HTML:
+**Comparte este enlace** (no muestra tu usuario de GitHub):
 
-**https://jeansitogoat.github.io/mj-makeup-carta/**
+**https://majo-makeup-ec.vercel.app**
 
-Repositorio: [github.com/Jeansitogoat/mj-makeup-carta](https://github.com/Jeansitogoat/mj-makeup-carta)
+Alternativa (incluye tu usuario de GitHub en la URL):  
+https://jeansitogoat.github.io/mj-makeup-carta/
 
-(GitHub Pages puede tardar 1–2 minutos la primera vez en publicarse.)
+Repositorio (privado o solo para ti): [github.com/Jeansitogoat/mj-makeup-carta](https://github.com/Jeansitogoat/mj-makeup-carta)
+
+### Dominio propio (opcional, más profesional)
+
+En Vercel → proyecto **majo-makeup-ec** → Settings → Domains puedes añadir por ejemplo `carta.tudominio.com` y el link deja de decir `vercel.app`.
 
 ## Importante: cómo compartir con clientes
 
