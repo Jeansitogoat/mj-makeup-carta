@@ -116,6 +116,7 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: var(--shadow-warm);
+            overflow-x: hidden;
         }
 
         @media (min-width: 640px) {
@@ -137,12 +138,36 @@
             padding-top: max(0.5rem, var(--safe-top));
         }
 
-        .barra-fija {
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
+        .barra-inferior-dock {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .barra-inferior-dock__panel {
+            pointer-events: auto;
+            width: 100%;
+            max-width: 28rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 0.75rem;
             padding-left: max(1.25rem, var(--safe-left));
             padding-right: max(1.25rem, var(--safe-right));
             padding-bottom: max(1rem, var(--safe-bottom));
+            background: #ffffff;
+            border-top: 1px solid rgba(227, 213, 202, 0.9);
+            box-shadow: 0 -8px 24px rgba(44, 41, 38, 0.08);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        @supports (padding: max(0px)) {
+            .barra-inferior-dock__panel {
+                padding-bottom: max(1rem, var(--safe-bottom));
+            }
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -241,7 +266,7 @@
         Este archivo no se puede compartir solo. Usa el <strong class="text-white">enlace web</strong> (Vercel/GitHub Pages) con internet para ver diseño, fotos y video.
     </div>
 
-    <div class="app-shell max-w-md mx-auto bg-nude-50 relative overflow-x-hidden overscroll-y-auto sm:rounded-[1.75rem] sm:my-4 sm:ring-1 sm:ring-nude-200/80">
+    <div class="app-shell max-w-md mx-auto bg-nude-50 relative sm:rounded-[1.75rem] sm:my-4 sm:ring-1 sm:ring-nude-200/80">
 
         <div class="grain" aria-hidden="true"></div>
 
@@ -385,18 +410,18 @@
             </main>
         </div>
 
-        <!-- Barra inferior -->
-        <div id="barra-inferior" class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
-            <div id="barra-inferior-inner" class="barra-fija pointer-events-auto w-full max-w-md bg-white/95 backdrop-blur-sm border-t border-nude-200 pt-3 shadow-[0_-8px_24px_rgba(44,41,38,0.08)]">
-                <button type="button" id="btn-barra-principal" onclick="agendar('Asesoría General')" class="btn-whatsapp w-full bg-dark text-white font-sans font-semibold text-sm py-3.5 pl-5 pr-2 rounded-full active:scale-[0.98] flex items-center justify-between gap-3 min-h-[48px] group">
-                    <span id="btn-barra-texto" class="pl-1 text-left leading-tight">Agendar mi cita</span>
-                    <span class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/15 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-xl" aria-hidden="true"></i>
-                    </span>
-                </button>
-            </div>
-        </div>
+    </div>
 
+    <!-- Barra inferior: fuera de .app-shell para que position:fixed funcione bien en iOS/Android -->
+    <div id="barra-inferior" class="barra-inferior-dock" role="region" aria-label="Agendar cita">
+        <div id="barra-inferior-inner" class="barra-inferior-dock__panel">
+            <button type="button" id="btn-barra-principal" onclick="agendar('Asesoría General')" class="btn-whatsapp w-full bg-dark text-white font-sans font-semibold text-sm py-3.5 pl-5 pr-2 rounded-full active:scale-[0.98] flex items-center justify-between gap-3 min-h-[48px] group">
+                <span id="btn-barra-texto" class="pl-1 text-left leading-tight">Agendar mi cita</span>
+                <span class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/15 transition-colors">
+                    <i class="fa-brands fa-whatsapp text-xl" aria-hidden="true"></i>
+                </span>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -567,8 +592,12 @@
 
         actualizarAlturaBarra();
         window.addEventListener('resize', actualizarAlturaBarra, { passive: true });
+        window.addEventListener('orientationchange', () => {
+            setTimeout(actualizarAlturaBarra, 100);
+        }, { passive: true });
         if (window.visualViewport) {
             window.visualViewport.addEventListener('resize', actualizarAlturaBarra);
+            window.visualViewport.addEventListener('scroll', actualizarAlturaBarra);
         }
 
         if (location.protocol === 'file:') {
